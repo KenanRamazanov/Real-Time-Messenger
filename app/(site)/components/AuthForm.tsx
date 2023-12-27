@@ -1,5 +1,6 @@
 "use client"
 
+import Button from "@/app/components/Button";
 import Input from "@/app/components/inputs/Input";
 import { useRouter } from "next/navigation";
 import { useCallback, useState } from "react"
@@ -66,12 +67,33 @@ const AuthForm = () => {
        className="space-y-6 "
        onSubmit={handleSubmit(onSubmit)}
        >
+        {variant === 'REGISTER' && (
        <Input
-       id="email"
-       label="Email"
+       id="name"
+       label="Name"
        errors={errors}
        register={register}
        />
+        )}
+         <Input
+       id="email"
+       label="Email address"
+       type="email"
+       errors={errors}
+       register={register}
+       />
+        <Input
+       id="password"
+       label="Password"
+       type="password"
+       errors={errors}
+       register={register}
+       />
+       <div>
+        <Button>
+            Test
+        </Button>
+       </div>
        </form>
         </div>
     </div>
