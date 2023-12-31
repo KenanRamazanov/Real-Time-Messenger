@@ -61,11 +61,21 @@ const AuthForm = () => {
           .finally(() => setIsLoading(false))
         }
       }
-    const socialAction = (action: string) => {
+      const socialAction = (action: string) => {
         setIsLoading(true);
-
-        // NextAuth SocialSign
-    }
+    
+        signIn(action, { redirect: false })
+          .then((callback) => {
+            if (callback?.error) {
+              toast.error('Invalid credentials!');
+            }
+    
+            if (callback?.ok) {
+              router.push('/conversations')
+            }
+          })
+          .finally(() => setIsLoading(false));
+      } 
   return (
     <div className="
     mt-8
