@@ -1,6 +1,4 @@
-
 import EmptyState from "../(site)/components/EmptyState";
-
 
 const People = () => {
   return (
