@@ -1,5 +1,4 @@
-import React from 'react'
-
+"use client"
 const MobileFooter = () => {
   return (
     <div>MobileFooter</div>
