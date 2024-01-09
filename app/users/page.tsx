@@ -1,4 +1,4 @@
-import EmptyState from "../(site)/components/EmptyState";
+import EmptyState from "../components/EmptyState";
 
 const People = () => {
   return (
