@@ -19,7 +19,7 @@ const conversations = await getConversations();
         <ConversationList 
           users={users} 
           title="Messages" 
-          initialItems={[]}
+          initialItems={conversations}
         />
         {children}
       </div>
