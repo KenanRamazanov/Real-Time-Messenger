@@ -1,9 +1,15 @@
-import React from 'react'
 
-const page = () => {
-  return (
-    <div>page</div>
-  )
+
+interface IParams {
+    conversationId: string;
+  }
+const ConversationId = async ({params} : {params: IParams}) => {
+return (
+    <div>
+        Conversation Id!
+    </div>
+)
 }
 
-export default page
+
+export default ConversationId;
