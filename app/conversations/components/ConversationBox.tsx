@@ -8,11 +8,14 @@ import { useSession } from "next-auth/react";
 import clsx from "clsx";
 import { FullConversationType } from "@/app/types";
 interface ConversationBoxProps {
-    data : FullConversationType
+    data : FullConversationType,
+    selected?: boolean;
 }
 const ConversationBox:React.FC<ConversationBoxProps> = ({
-    data
+    data,
+    selected
 }) => {
+  
   return (
     <div>ConversationBox</div>
   )
