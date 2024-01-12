@@ -3,6 +3,7 @@ import getMessages from "@/app/actions/getMessages";
 import EmptyState from "@/app/components/EmptyState";
 import Header from "./components/Header";
 import Body from "./components/Body";
+import { Form } from "react-hook-form";
 
 
 interface IParams {
@@ -26,6 +27,7 @@ return (
       <div className="h-full flex flex-col">
        <Header conversation={conversation}/>
        <Body />
+       <Form />
       </div>
     </div>
 )
