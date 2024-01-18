@@ -1,3 +1,4 @@
+"use client"
 import useOtherUser from '@/app/hooks/useOtherUser';
 import { Conversation, User } from '@prisma/client';
 import React, { Fragment, useMemo, useState } from 'react'
@@ -59,7 +60,16 @@ interface ProfileDrawerProps {
          leaveFrom="translate-x-0"
          leaveTo="translate-x-full"
         >
-
+        <Dialog.Panel
+        className="pointer-events-auto w-screen max-w-md"
+        >
+        <div 
+        className='
+        flex h-full flex-col
+        '>
+   
+        </div>
+        </Dialog.Panel>
         </Transition.Child>
         </div>
        </div>
