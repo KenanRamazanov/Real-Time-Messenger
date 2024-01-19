@@ -4,6 +4,8 @@ import { Conversation, User } from '@prisma/client';
 import React, { Fragment, useMemo, useState } from 'react'
 import { format } from 'date-fns';
 import { Dialog, Transition } from '@headlessui/react';
+import { IoClose, IoTrash } from 'react-icons/io5'
+import Avatar from '@/app/components/Avatar';
 
 interface ProfileDrawerProps {
     isOpen: boolean;
@@ -63,11 +65,36 @@ interface ProfileDrawerProps {
         <Dialog.Panel
         className="pointer-events-auto w-screen max-w-md"
         >
-        <div 
-        className='
-        flex h-full flex-col
-        '>
-   
+        <div className="flex h-full flex-col overflow-y-scroll bg-white py-6 shadow-xl">
+           <div className='px-4 sm:px-6'>
+              <div className='flex items-start justify-end'>
+                <div className='ml-3 flex h-7 items-center'>
+                  <button
+                  onClick={onClose}
+                  type='button'
+                  className='
+                  rounded-md
+                  bg-white
+                 text-gray-400
+                 hover:text-gray-500
+                 focus:outline-none 
+                 focus:ring-2
+                 focus:ring-indigo-500
+                 focus:ring-offset-2'
+                  >
+                    <span className='sr-only'>Close panel</span>
+                    <IoClose size={24}/>
+                  </button>
+                </div>
+                </div>
+            </div>
+        <div className='relative mt-6 flex-1 px-4 sm:px-6'>
+           <div className='flex flex-col items-center'>
+             <div className='mb-2'>
+               <Avatar/>
+             </div>
+           </div>
+        </div>
         </div>
         </Dialog.Panel>
         </Transition.Child>
