@@ -16,7 +16,8 @@ const DesktopSidebar:React.FC<DesktopSidebarProps> = ({
     const [isOpen, setIsOpen] = useState(false);
     console.log(currentUser)
   return (
-    <div 
+    <>
+       <div 
     className='
     hidden 
     lg:fixed 
@@ -63,6 +64,8 @@ flex-col
   </div>
 </nav>
     </div>
+    </>
+
   )
 }
 
