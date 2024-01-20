@@ -20,9 +20,8 @@ interface ProfileDrawerProps {
     onClose,
     data,
   }) => {
-    const [confirmOpen, setConfirmOpen] = useState(false);
   const otherUser = useOtherUser(data);
-  
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const joinedDate = useMemo(() => {
     return format(new Date(otherUser.createdAt), 'PP');
   }, [otherUser.createdAt]);
@@ -40,9 +39,13 @@ interface ProfileDrawerProps {
   return (
     <>
     <Modal
-     isOpen={confirmOpen} 
-     onClose={() => setConfirmOpen(false)}
-    />
+     isOpen={isModalOpen}
+     onClose={() => setIsModalOpen(false)}
+    >
+        <div className='bg-white p-5'>
+        <p>Helllo Modal</p>
+        </div>
+        </Modal>
        <Transition.Root show={isOpen} as={Fragment}>
      <Dialog as="div" className="relative z-50" onClose={onClose}>
        <Transition.Child
@@ -107,10 +110,11 @@ interface ProfileDrawerProps {
              </div>
              <div className='flex gap-10 my-8'>
               <div 
-              onClick={() => {}}
+              onClick={() => setIsModalOpen(true)}
               className="flex flex-col gap-3 items-center cursor-pointer hover:opacity-75"
               >
-               <div className='w-10 h-10 bg-neutral-100 rounded-full flex items-center  justify-center'>
+               <div
+                className='w-10 h-10 bg-neutral-100 rounded-full flex items-center  justify-center'>
                  <IoTrash size={20}/>
                </div>
                <div className="text-sm font-light text-neutral-600">
