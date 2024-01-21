@@ -7,6 +7,8 @@ import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import Modal from "../Modal";
 import Input from "../inputs/Input";
+import Image from "next/image";
+import { CldUploadButton } from "next-cloudinary";
 
 interface SettingsModalProps {
     isOpen?: boolean;
@@ -82,6 +84,36 @@ interface SettingsModalProps {
           required 
           register={register}
           />
+          <div>
+             <label
+             htmlFor="photo" 
+             className="
+               block 
+               text-sm 
+               font-medium 
+               leading-6 
+               text-gray-900
+             "
+             >
+                Photo
+             </label>
+             <div className="mt-2 flex items-center gap-x-3">
+             <Image
+                    width="48"
+                    height="48" 
+                    className="rounded-full" 
+                    src={image || currentUser?.image || '/images/placeholder.jpg'}
+                    alt="Avatar"
+                  />
+                  <CldUploadButton
+                   options={{ maxFiles: 1 }} 
+                   onUpload={handleUpload} 
+                   uploadPreset="jimlbmud"
+                  >
+
+                  </CldUploadButton>
+             </div>
+          </div>
         </div>
         </div>
      </div>
