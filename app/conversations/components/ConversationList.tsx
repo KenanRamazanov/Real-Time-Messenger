@@ -26,7 +26,8 @@ const ConversationList:React.FC<ConversationListProps> = ({
   const session = useSession();
   const { conversationId, isOpen } = useConversation();
   return (
-  <aside className={clsx(`
+  <>
+    <aside className={clsx(`
   fixed 
   inset-y-0 
   pb-20
@@ -44,6 +45,7 @@ const ConversationList:React.FC<ConversationListProps> = ({
       Messages
       </div>
       <div 
+         onClick={() => setIsModalOpen(true)} 
       className="
                rounded-full 
                 p-2 
@@ -65,6 +67,7 @@ const ConversationList:React.FC<ConversationListProps> = ({
           ))}
   </div>
   </aside>
+  </>
   )
 }
 
