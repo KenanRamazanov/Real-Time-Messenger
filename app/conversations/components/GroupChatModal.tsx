@@ -1,7 +1,6 @@
 'use client';
 
 import { User } from "@prisma/client";
-
 interface GroupChatModalProps {
     isOpen?: boolean;
     onClose: () => void;
