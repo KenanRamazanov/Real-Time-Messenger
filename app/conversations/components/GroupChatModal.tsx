@@ -1,4 +1,6 @@
 'use client';
+import Modal from "@/app/components/Modal";
+import Input from "@/app/components/inputs/Input";
 import { User } from "@prisma/client";
 import axios from "axios";
 import { useRouter } from "next/navigation";
@@ -52,7 +54,33 @@ interface GroupChatModalProps {
     }
   
   return (
-    <div>GroupChatModal</div>
+<Modal isOpen={isOpen} onClose={onClose}>
+ <form onSubmit={handleSubmit(onSubmit)}>
+    <div className="space-y-12">
+      <div className="border-b border-gray-900/10 pb-12">
+        <h2
+        className="text-base font-semibold leading-7 text-gray-900 "
+        >
+         Create a group chat
+        </h2>
+        <p className="mt-1 text-sm leading-6 text-gray-600">
+        Create a chat with more than 2 people.
+        </p>
+        <div className="mt-10 flex flex-col gap-y-8">
+              <Input
+                disabled={isLoading}
+                label="Name" 
+                id="name" 
+                errors={errors} 
+                required 
+                register={register}
+              />
+              
+       </div>
+      </div>
+    </div>
+ </form>
+</Modal>
   )
 }
 
