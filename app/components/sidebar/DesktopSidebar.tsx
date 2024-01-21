@@ -4,6 +4,7 @@ import React, { useState } from 'react'
 import DesktopItem from './DesktopItem';
 import { User } from '@prisma/client';
 import Avatar from '@/app/components/Avatar';
+import SettingsModal from './SettingsModal';
 
 
 interface DesktopSidebarProps {
@@ -17,6 +18,11 @@ const DesktopSidebar:React.FC<DesktopSidebarProps> = ({
     console.log(currentUser)
   return (
     <>
+    <SettingsModal
+    currentUser={currentUser}
+     isOpen={isOpen} 
+     onClose={() => setIsOpen(false)}
+    />
        <div 
     className='
     hidden 
