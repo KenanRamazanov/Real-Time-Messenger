@@ -1,56 +1,99 @@
 'use client';
 
-import { User } from "@prisma/client";
+import { HiChevronLeft } from 'react-icons/hi'
+import { HiEllipsisHorizontal } from 'react-icons/hi2';
+import { useMemo, useState } from "react";
+import Link from "next/link";
+import { Conversation, User } from "@prisma/client";
 
+import useOtherUser from "@/app/hooks/useOtherUser";
 import useActiveList from "@/app/hooks/useActiveList";
-import Image from "next/image";
 
-interface AvatarProps {
-  user?: User;
-};
+import Avatar from "@/app/components/Avatar";
+import AvatarGroup from "@/app/components/AvatarGroup";
+import ProfileDrawer from "./ProfileDrawer";
 
-const Avatar: React.FC<AvatarProps> = ({ user }) => {
-  const { members } = useActiveList();
-  const isActive = members.indexOf(user?.email!) !== -1;
-
-  return (
-    <div className="relative">
-      <div className="
-        relative 
-        inline-block 
-        rounded-full 
-        overflow-hidden
-        h-9 
-        w-9 
-        md:h-11 
-        md:w-11
-      ">
-        <Image
-          fill
-          src={user?.image || '/images/placeholder.jpg'}
-          alt="Avatar"
-        />
-      </div>
-      {isActive ? (
-        <span 
-          className="
-            absolute 
-            block 
-            rounded-full 
-            bg-green-500 
-            ring-2 
-            ring-white 
-            top-0 
-            right-0
-            h-2 
-            w-2 
-            md:h-3 
-            md:w-3
-          " 
-        />
-      ) : null}
-    </div>
-  );
+interface HeaderProps {
+  conversation: Conversation & {
+    users: User[]
+  }
 }
 
-export default Avatar;
+const Header: React.FC<HeaderProps> = ({ conversation }) => {
+  const otherUser = useOtherUser(conversation);
+  const [drawerOpen, setDrawerOpen] = useState(false);
+
+  const { members } = useActiveList();
+  const isActive = members.indexOf(otherUser?.email!) !== -1;
+  const statusText = useMemo(() => {
+    if (conversation.isGroup) {
+      return `${conversation.users.length} members`;
+    }
+
+    return isActive ? 'Active' : 'Offline'
+  }, [conversation, isActive]);
+
+  return (
+  <>
+    <ProfileDrawer 
+      data={conversation} 
+      isOpen={drawerOpen} 
+      onClose={() => setDrawerOpen(false)}
+    />
+    <div 
+      className="
+        bg-white 
+        w-full 
+        flex 
+        border-b-[1px] 
+        sm:px-4 
+        py-3 
+        px-4 
+        lg:px-6 
+        justify-between 
+        items-center 
+        shadow-sm
+      "
+    >
+      <div className="flex gap-3 items-center">
+        <Link
+          href="/conversations" 
+          className="
+            lg:hidden 
+            block 
+            text-sky-500 
+            hover:text-sky-600 
+            transition 
+            cursor-pointer
+          "
+        >
+          <HiChevronLeft size={32} />
+        </Link>
+        {conversation.isGroup ? (
+          <AvatarGroup users={conversation.users} />
+        ) : (
+          <Avatar user={otherUser} />
+        )}
+        <div className="flex flex-col">
+          <div>{conversation.name || otherUser.name}</div>
+          <div className="text-sm font-light text-neutral-500">
+            {statusText}
+          </div>
+        </div>
+      </div>
+      <HiEllipsisHorizontal
+        size={32}
+        onClick={() => setDrawerOpen(true)}
+        className="
+          text-sky-500
+          cursor-pointer
+          hover:text-sky-600
+          transition
+        "
+      />
+    </div>
+    </>
+  );
+}
+ 
+export default Header;

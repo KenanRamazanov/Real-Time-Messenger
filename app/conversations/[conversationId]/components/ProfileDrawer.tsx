@@ -9,6 +9,7 @@ import Avatar from '@/app/components/Avatar';
 import Modal from '@/app/components/Modal';
 import ConfirmModal from '@/app/components/ConfirmModal';
 import AvatarGroup from '@/app/components/AvatarGroup';
+import useActiveList from '@/app/hooks/useActiveList';
 
 interface ProfileDrawerProps {
     isOpen: boolean;
@@ -22,22 +23,28 @@ interface ProfileDrawerProps {
     onClose,
     data,
   }) => {
-  const otherUser = useOtherUser(data);
-  const [confirmOpen, setConfirmOpen] = useState(false);
-  const joinedDate = useMemo(() => {
-    return format(new Date(otherUser.createdAt), 'PP');
-  }, [otherUser.createdAt]);
+    const [confirmOpen, setConfirmOpen] = useState(false);
+    const otherUser = useOtherUser(data);
+    
+    const joinedDate = useMemo(() => {
+      return format(new Date(otherUser.createdAt), 'PP');
+    }, [otherUser.createdAt]);
+    
+    const title = useMemo(() => {
+      return data.name || otherUser.name;
+    }, [data.name, otherUser.name]);
   
-  const title = useMemo(() => {
-    return data.name || otherUser.name;
-  }, [data.name, otherUser.name]);
-  const statusText = useMemo(() => {
-    if (data.isGroup) {
-      return `${data.users.length} members`;
-    }
-
-    return "Active"
-  }, [data]);
+    const { members } = useActiveList();
+    const isActive = members.indexOf(otherUser?.email!) !== -1;
+  
+    const statusText = useMemo(() => {
+      if (data.isGroup) {
+        return `${data.users.length} members`;
+      }
+  
+      return isActive ? 'Active' : 'Offline'
+    }, [data, isActive]);
+  
   return (
     <>
        <ConfirmModal 
