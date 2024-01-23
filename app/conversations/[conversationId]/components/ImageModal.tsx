@@ -17,7 +17,6 @@ const ImageModal: React.FC<ImageModalProps> = ({
   if (!src) {
     return null;
   }
-
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <div className="w-80 h-80">
