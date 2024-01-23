@@ -5,6 +5,7 @@ import ToasterContext from './context/ToasterContext'
 import AuthContext from './context/AuthContext'
 import ActiveStatus from './components/ActiveStatus'
 
+
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
